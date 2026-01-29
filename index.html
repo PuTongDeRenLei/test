@@ -4,7 +4,8 @@
 	<meta charset="utf-8">
 	<title>看到这段文本的是gay👿</title>
 	<style>
-		.button {
+		button {
+			position: relative;
 			width: 180px;
 			height: 90px;
 			background-color: #00a9ff;
@@ -12,8 +13,18 @@
 			cursor: pointer;
 			border: none;
 			font-size: 35px;
+			transition: transform 0.17s ease-in-out;
 		}
-		#myImage {
+		.button:hover {
+            background-color: #33b5ff;
+            transform: scale(1.05);
+        }
+
+    	.button:active {
+            background-color: #0088cc;
+            transform: scale(1.01);
+       	}
+        #myImage {
 			display: none;
 			width: 500px;
 			height: 286px;
