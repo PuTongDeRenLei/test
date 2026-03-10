@@ -1,11 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-	<meta charset="utf-8">
-	<title>秘密㊙️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>补肺丸盒子 - 商品购买</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background: #fff;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        .product-card {
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .product-img {
+            width: 100%;
+            display: block;
+        }
+        .product-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 15px 10px;
+        }
+        .tags {
+            display: flex;
+            gap: 10px;
+            margin: 0 10px 15px;
+        }
+        .tag {
+            padding: 4px 12px;
+            border: 1px solid #ff6699;
+            color: #ff3366;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        .price-area {
+            margin: 20px 10px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .price-label {
+            font-size: 18px;
+            color: #666;
+        }
+        .price-old {
+            font-size: 22px;
+            color: #999;
+            text-decoration: line-through;
+        }
+        .price-new {
+            font-size: 36px;
+            color: #ff0000;
+            font-weight: bold;
+        }
+        .sales {
+            font-size: 16px;
+            color: #999;
+            margin: 0 10px 20px;
+        }
+        .buy-btn {
+            width: calc(100% - 20px);
+            margin: 0 10px 20px;
+            padding: 12px;
+            background: #ff3333;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .loading-mask {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 18px;
+        }
+        .loading-spin {
+            width: 30px;
+            height: 30px;
+            border: 3px solid #fff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-	<h1 align="center">加载时间可能有点长，请耐心等待，绝对惊艳到你！</h1>
-	<img src="loading.gif" width="600px">
+    <div class="product-card">
+        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/926a8a0e82e240319a1e07df9a29df09~tplv-a9rns2rl98-image.image" class="product-img" alt="补肺丸盒子">
+        <div class="product-title">补肺丸盒子</div>
+        <div class="tags">
+            <span class="tag">今日热销0万+</span>
+            <span class="tag">特价促销十一折</span>
+        </div>
+        <div class="price-area">
+            <span class="price-label">到手价</span>
+            <span class="price-old">¥10</span>
+            <span class="price-new">¥11</span>
+        </div>
+        <div class="sales">已售0万+</div>
+        <button class="buy-btn" onclick="showLoading()">立即购买</button>
+    </div>
+
+    <div class="loading-mask" id="loading">
+        <div class="loading-spin"></div>
+        <span>加载中...</span>
+    </div>
+
+    <script>
+        function showLoading() {
+            document.getElementById('loading').style.display = 'flex';
+        }
+    </script>
 </body>
 </html>
