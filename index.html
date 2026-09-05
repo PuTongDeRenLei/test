@@ -1,79 +1,444 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商品购买页</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: sans-serif;
-        }
-        body {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 10px;
-            background: #fff;
-        }
-        .product-img {
-            width: 100%;
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-        .buy-btn {
-            width: 100%;
-            padding: 14px;
-            background: #ff3333;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .loading-mask {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            color: #fff;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-        }
-        .loading-spin {
-            width: 28px;
-            height: 28px;
-            border: 3px solid #fff;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 10px;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+<meta charset="UTF-8">
+<title>绿色阿姨与诸葛屁登的奇妙冒险</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #00ff00;
+  overflow-x: hidden;
+  font-family: '微软雅黑', sans-serif;
+  cursor: crosshair;
+}
+
+/* 满屏飘动的绿色阿姨 */
+.aunt {
+  position: fixed;
+  font-size: 40px;
+  animation: float 3s infinite ease-in-out alternate;
+  z-index: 999;
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  100% { transform: translateY(-50px) rotate(720deg) scale(1.5); }
+}
+
+/* 标题 */
+h1 {
+  text-align: center;
+  font-size: 60px;
+  color: #ff00ff;
+  text-shadow: 3px 3px 0 #ffff00, -3px -3px 0 #00ffff;
+  animation: shake 0.1s infinite;
+  margin-top: 20px;
+  line-height: 1.2;
+}
+
+@keyframes shake {
+  0% { transform: translate(0); }
+  25% { transform: translate(2px, -2px); }
+  50% { transform: translate(-2px, 2px); }
+  75% { transform: translate(2px, 2px); }
+  100% { transform: translate(-2px, -2px); }
+}
+
+/* 诸葛屁登登场 */
+.zhuge {
+  width: 300px;
+  height: 400px;
+  margin: 30px auto;
+  background: linear-gradient(45deg, #8B4513, #DEB887, #8B4513);
+  border: 5px solid #ff0000;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 0.5s infinite, spin 4s infinite linear;
+  position: relative;
+}
+
+.zhuge::before {
+  content: '🐷';
+  font-size: 100px;
+  animation: bounce 0.3s infinite;
+}
+
+.zhuge::after {
+  content: '🧠上知天文下知地理🧠';
+  position: absolute;
+  bottom: 20px;
+  font-size: 18px;
+  color: #ffff00;
+  font-weight: bold;
+  text-align: center;
+  background: rgba(0,0,0,0.8);
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* 诸葛屁登的台词 */
+.speech {
+  background: #000;
+  color: #00ff00;
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+  border: 3px dashed #ff00ff;
+  font-size: 20px;
+  line-height: 1.8;
+  animation: typewriter 2s infinite;
+}
+
+@keyframes typewriter {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* 嘉欣 */
+.jiaxin {
+  text-align: center;
+  font-size: 50px;
+  color: #ff69b4;
+  text-shadow: 0 0 20px #ff1493;
+  animation: rainbow 0.5s infinite;
+  margin: 30px 0;
+}
+
+@keyframes rainbow {
+  0% { color: #ff0000; }
+  16% { color: #ff8000; }
+  33% { color: #ffff00; }
+  50% { color: #00ff00; }
+  66% { color: #0000ff; }
+  83% { color: #8000ff; }
+  100% { color: #ff0080; }
+}
+
+/* 霸王龙 */
+.dino {
+  font-size: 120px;
+  text-align: center;
+  animation: roar 1s infinite;
+  filter: hue-rotate(0deg);
+}
+
+@keyframes roar {
+  0% { transform: scale(1) rotate(0deg); filter: hue-rotate(0deg); }
+  50% { transform: scale(1.3) rotate(5deg); filter: hue-rotate(180deg); }
+  100% { transform: scale(1) rotate(0deg); filter: hue-rotate(360deg); }
+}
+
+/* 弹窗 */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ff0000;
+  color: #fff;
+  padding: 30px;
+  border: 10px solid #ffff00;
+  font-size: 30px;
+  font-weight: bold;
+  z-index: 10000;
+  animation: popup-shake 0.2s infinite;
+  display: none;
+}
+
+@keyframes popup-shake {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(1deg); }
+}
+
+/* 滚动字幕 */
+.marquee {
+  background: #000;
+  color: #00ff00;
+  font-size: 24px;
+  padding: 10px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.marquee span {
+  display: inline-block;
+  animation: scroll 5s linear infinite;
+}
+
+@keyframes scroll {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+/* 闪烁背景 */
+.flash {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 500;
+  animation: flash-bg 0.1s infinite;
+  opacity: 0.1;
+}
+
+@keyframes flash-bg {
+  0% { background: #ff0000; }
+  33% { background: #00ff00; }
+  66% { background: #0000ff; }
+  100% { background: #ffff00; }
+}
+
+/* 知识展示 */
+.knowledge {
+  background: rgba(0,0,0,0.9);
+  color: #00ffff;
+  padding: 30px;
+  margin: 20px auto;
+  width: 85%;
+  border-radius: 15px;
+  font-size: 18px;
+  line-height: 2;
+}
+
+.knowledge h3 {
+  color: #ff0;
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+/* 音频可视化效果 */
+.bars {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin: 20px 0;
+}
+
+.bar {
+  width: 20px;
+  background: #ff00ff;
+  animation: bar-height 0.5s infinite ease-in-out;
+}
+
+.bar:nth-child(1) { animation-delay: 0s; }
+.bar:nth-child(2) { animation-delay: 0.1s; }
+.bar:nth-child(3) { animation-delay: 0.2s; }
+.bar:nth-child(4) { animation-delay: 0.3s; }
+.bar:nth-child(5) { animation-delay: 0.4s; }
+.bar:nth-child(6) { animation-delay: 0.5s; }
+.bar:nth-child(7) { animation-delay: 0.6s; }
+
+@keyframes bar-height {
+  0%, 100% { height: 20px; }
+  50% { height: 100px; }
+}
+
+/* 按钮 */
+.mad-btn {
+  display: block;
+  margin: 30px auto;
+  padding: 20px 50px;
+  font-size: 30px;
+  background: linear-gradient(45deg, #ff0000, #ff00ff, #0000ff);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  animation: btn-shake 0.3s infinite;
+}
+
+@keyframes btn-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px) rotate(-2deg); }
+  75% { transform: translateX(5px) rotate(2deg); }
+}
+</style>
 </head>
 <body>
-    <img src="https://raw.githubusercontent.com/PuTongDeRenLei/test/refs/heads/main/21.png" class="product-img" alt="商品图片">
-    <button class="buy-btn" onclick="showLoading()">立即购买</button>
 
-    <div class="loading-mask" id="loading">
-        <div class="loading-spin"></div>
-        <span>加载中...</span>
-    </div>
+<div class="flash"></div>
 
-    <script>
-        function showLoading() {
-            document.getElementById('loading').style.display = 'flex';
-        }
-    </script>
+<!-- 飘动的绿色阿姨 -->
+<script>
+for(let i=0; i<20; i++) {
+  let div = document.createElement('div');
+  div.className = 'aunt';
+  div.innerHTML = '👵💚';
+  div.style.left = Math.random() * 100 + 'vw';
+  div.style.top = Math.random() * 100 + 'vh';
+  div.style.animationDelay = Math.random() * 3 + 's';
+  div.style.animationDuration = (2 + Math.random() * 3) + 's';
+  document.body.appendChild(div);
+}
+</script>
+
+<h1>🌿绿色阿姨🌿<br>×<br>🧠诸葛屁登🧠<br>×<br>💖嘉欣💖<br>×<br>🦖霸王龙🦖</h1>
+
+<div class="zhuge"></div>
+
+<div class="speech" id="speech">
+诸葛屁登说：<br>
+"我上知天文——太阳从东边升起！<br>
+我下知地理——地球是圆的！<br>
+我中知空气——呼吸要用鼻子！<br>
+绿色阿姨说：对！！！"
+</div>
+
+<div class="jiaxin">
+💖 嘉 欣 💖<br>
+<span style="font-size:30px;">"诸葛屁登你别说了！！！"</span>
+</div>
+
+<div class="dino">
+🦖<br>
+<span style="font-size:30px; color:#fff;">RAWRRRRRRRRR!!!!!!!!!</span>
+</div>
+
+<div class="knowledge">
+<h3>🧠 诸葛屁登的知识殿堂 🧠</h3>
+<p>· 天圆地方？不，是天方地圆！</p>
+<p>· 赤壁之战用的是火攻，因为水攻会游泳的人不怕</p>
+<p>· 八卦阵的原理：走左边是死，走右边也是死，不走也是死</p>
+<p>· 空城计：城里没人所以敌人不敢进，因为怕踩到地雷</p>
+<p>· 木牛流马：古代版特斯拉Cybertruck</p>
+<p>· 借东风：其实就是看了天气预报</p>
+<p>· 草船借箭：环保理念，循环利用</p>
+<p>· 七擒孟获：古代版真人CS</p>
+<p>· 出师表：古代版辞职信</p>
+<p>· 三顾茅庐：古代版面试，面了三次才通过</p>
+</div>
+
+<div class="bars">
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+</div>
+
+<button class="mad-btn" onclick="goMad()">点我你会疯</button>
+
+<div class="popup" id="popup">
+  🚨 警告 🚨<br>
+  你已经疯了<br>
+  绿色阿姨正在看着你<br>
+  诸葛屁登正在计算你的智商<br>
+  嘉欣已经跑了<br>
+  霸王龙饿了<br>
+  <button onclick="this.parentElement.style.display='none'" style="margin-top:15px;padding:10px 20px;font-size:18px;">我认了</button>
+</div>
+
+<div class="marquee">
+  <span>🌿绿色阿姨说：诸葛屁登你别说了🌿 嘉欣：救命啊！！！ 🦖霸王龙：RAWR 🧠诸葛屁登：其实地球是平的 🌿绿色阿姨：对！！！ 🦖霸王龙：我要吃嘉欣！！！ 💖嘉欣：诸葛屁登救我！！！ 🧠诸葛屁登：让我算一卦…… 🌿绿色阿姨：算完了吗？？？ 🦖霸王龙：RAWRRRRRR 💖嘉欣：你们够了！！！ 🧠诸葛屁登：天机不可泄露 🌿绿色阿姨：说人话！！！ 🦖霸王龙：RAWR 💖嘉欣：我走了你们自己玩吧 🧠诸葛屁登：且慢，我还有一计…… 🌿绿色阿姨：什么计？？？ 🦖霸王龙：RAWRRRRRRRRRRR 💖嘉欣：……</span>
+</div>
+
+<script>
+// 诸葛屁登台词轮播
+const speeches = [
+  '"我上知天文——太阳从东边升起！我下知地理——地球是圆的！我中知空气——呼吸要用鼻子！绿色阿姨说：对！！！"',
+  '"空城计的原理是：城里没人，敌人不敢进，因为怕踩到地雷。"',
+  '"借东风其实就是看了天气预报，我诸葛屁登有VIP会员。"',
+  '"草船借箭体现了环保理念，循环利用，绿色阿姨点赞。"',
+  '"七擒孟获？就是古代版真人CS，孟获网速不好所以输了。"',
+  '"木牛流马是古代版特斯拉Cybertruck，不用充电，吃草就行。"',
+  '"八卦阵：走左边是死，走右边也是死，不走也是死，这就是人生。"',
+  '"三顾茅庐就是古代版面试，刘备面了三次我才通过，薪资没谈拢我就不去。"',
+  '"出师表？就是古代版辞职信，写得太长老板看完直接批了。"',
+  '"我的智商和绿色阿姨的绿色一样，无穷无尽。"'
+];
+
+let speechIndex = 0;
+setInterval(() => {
+  speechIndex = (speechIndex + 1) % speeches.length;
+  document.getElementById('speech').innerHTML = '诸葛屁登说：<br>' + speeches[speechIndex];
+}, 3000);
+
+// 疯狂模式
+function goMad() {
+  document.getElementById('popup').style.display = 'block';
+  
+  // 屏幕抖动
+  let count = 0;
+  let interval = setInterval(() => {
+    document.body.style.transform = `translate(${Math.random()*10-5}px, ${Math.random()*10-5}px)`;
+    count++;
+    if(count > 50) {
+      clearInterval(interval);
+      document.body.style.transform = 'translate(0,0)';
+    }
+  }, 50);
+  
+  // 背景疯狂变色
+  let colors = ['#ff0000','#00ff00','#0000ff','#ffff00','#ff00ff','#00ffff'];
+  let colorInterval = setInterval(() => {
+    document.body.style.background = colors[Math.floor(Math.random()*colors.length)];
+  }, 100);
+  
+  setTimeout(() => {
+    clearInterval(colorInterval);
+    document.body.style.background = '#00ff00';
+  }, 5000);
+}
+
+// 随机弹窗
+setInterval(() => {
+  if(Math.random() > 0.95) {
+    document.getElementById('popup').style.display = 'block';
+    setTimeout(() => {
+      document.getElementById('popup').style.display = 'none';
+    }, 2000);
+  }
+}, 3000);
+
+// 标题随机变化
+const titles = ['绿色阿姨与诸葛屁登', '诸葛屁登与霸王龙', '嘉欣的崩溃日常', '上知天文下知地理', '你已经被绿色阿姨盯上了', '霸王龙想吃嘉欣'];
+setInterval(() => {
+  document.title = titles[Math.floor(Math.random()*titles.length)];
+}, 1500);
+
+// 鼠标跟随效果
+document.addEventListener('mousemove', (e) => {
+  if(Math.random() > 0.97) {
+    let emoji = ['🌿','🧠','💖','🦖','👵','💚'][Math.floor(Math.random()*6)];
+    let div = document.createElement('div');
+    div.innerHTML = emoji;
+    div.style.position = 'fixed';
+    div.style.left = e.clientX + 'px';
+    div.style.top = e.clientY + 'px';
+    div.style.fontSize = '30px';
+    div.style.pointerEvents = 'none';
+    div.style.zIndex = 9999;
+    div.style.animation = 'float 1s forwards';
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 1000);
+  }
+});
+</script>
+
 </body>
 </html>
-
